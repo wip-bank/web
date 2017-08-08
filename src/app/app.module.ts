@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout';
 import { AccountModule } from './account/account.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true});
 
@@ -17,6 +18,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
   ],
   imports: [
     AccountModule,
+    TransactionModule,
     BrowserModule,
     FormsModule,
     HttpModule,
