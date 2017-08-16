@@ -1,7 +1,7 @@
 import { Transaction } from './transaction.model';
 
 export class Account {
-  id: number;
+  id?: number;
   owner: string;
   number: string;
   transactions?: Transaction[];

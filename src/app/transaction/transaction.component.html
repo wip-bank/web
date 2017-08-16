@@ -1,1 +1,21 @@
-<h1>Transactions</h1>
+<div class="container">
+  <h1>Transaktionen</h1>
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Amount</th>
+      <th>Reference</th>
+      <th>Date</th>
+    </thead>
+    <tr *ngFor="let transaction of transactions">
+      <th scope="row">{{ transaction.id }}</th>
+      <td>{{ transaction.sender.owner }}</td>
+      <td>{{ transaction.receiver.owner }}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.reference }}</td>
+      <td>{{ transaction.transactionDate }}</td>
+    </tr>
+  </table>
+</div>

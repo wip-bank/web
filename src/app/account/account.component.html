@@ -1,17 +1,31 @@
 <div class="container">
-  <table class="table">
+  <h1>Accounts</h1>
+
+  <table class="table table-striped">
     <thead>
-      <th>ID</th>
-      <th>Owner</th>
       <th>Number</th>
+      <th>Owner</th>
       <th>Other</th>
     </thead>
 
     <tr *ngFor="let account of accounts">
-      <th scope="row">{{ account.id }}</th>
+      <th scope="row">{{ account.number }}</th>
       <td>{{ account.owner }}</td>
-      <td>{{ account.number }}</td>
       <td>-</td>
     </tr>
   </table>
+
+  <div class="errors">
+    <div *ngFor="let error of errors" class="alert alert-danger">
+      {{ error.error }}
+    </div>
+  </div>
+
+   <form [formGroup]="createAccountForm" (ngSubmit)="createAccount()">
+    <div class="form-group">
+      <label for="owner">Neuer Account</label>
+      <input type="text" class="form-control" placeholder="Owner" formControlName="owner">
+    </div>
+    <input type="submit" class="btn btn-success" value="Erstellen">
+  </form> 
 </div>
