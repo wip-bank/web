@@ -8,4 +8,8 @@ import { Transaction } from '../models';
 export class TransactionService {
   constructor(private apiService: ApiService) {}
 
+  getAll(): Observable<Transaction[]> {
+    return this.apiService.get('/transaction')
+      .map((data) => data.transactions);
+  }
 }
