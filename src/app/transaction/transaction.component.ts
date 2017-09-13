@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 import { Transaction } from '../models';
 import { TransactionService, ApiService } from '../services';

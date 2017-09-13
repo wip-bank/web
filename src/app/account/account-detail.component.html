@@ -1,0 +1,12 @@
+<th scope="row">{{ account.number }}</th>
+<td>{{ account.owner }}</td>
+<td><a (click)="showDetail = !showDetail">mehr...</a></td>
+<div *ngIf="showDetail">
+  <form [formGroup]="updateAccountForm" (ngSubmit)="updateAccount()">
+    <div class="form-group">
+      <label for="owner">Namen ändern</label>
+      <input type="text" class="form-control" placeholder="Owner" formControlName="owner">
+    </div>
+    <input type="submit" class="btn btn-success" value="Erstellen">
+  </form> 
+</div>

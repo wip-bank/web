@@ -1,18 +1,19 @@
 <div class="container">
-  <h1>Accounts</h1>
+  <h1>Konten</h1>
 
   <table class="table table-striped">
     <thead>
-      <th>Number</th>
-      <th>Owner</th>
-      <th>Other</th>
+      <th>Kontonummer</th>
+      <th>Name</th>
+      <th>Aktion</th>
     </thead>
 
-    <tr *ngFor="let account of accounts">
+    <!-- <tr *ngFor="let account of accounts">
       <th scope="row">{{ account.number }}</th>
       <td>{{ account.owner }}</td>
-      <td>-</td>
-    </tr>
+      <td><a href="">mehr...</a></td>
+    </tr> -->
+    <tr app-account-detail *ngFor="let account of accounts" [account]="account" (error)="pushError($event)"></tr>
   </table>
 
   <div class="errors">

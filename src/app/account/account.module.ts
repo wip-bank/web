@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AccountComponent } from './account.component';
+import { AccountDetailComponent } from './account-detail.component';
 
 const accountRouting: ModuleWithProviders = RouterModule.forChild([
   {
@@ -14,7 +15,8 @@ const accountRouting: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
   declarations: [
-    AccountComponent
+    AccountComponent,
+    AccountDetailComponent
   ],
   imports: [
     CommonModule,

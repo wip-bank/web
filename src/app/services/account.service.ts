@@ -20,4 +20,8 @@ export class AccountService {
   create(owner: string): Observable<Account> {
     return this.apiService.postFormData('/account', { owner });
   }
+
+  update(number: string, owner: string): Observable<Account> {
+    return this.apiService.putFormData(`/account/${number}`, { owner });
+  }
 }
