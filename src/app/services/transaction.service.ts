@@ -12,4 +12,8 @@ export class TransactionService {
     return this.apiService.get('/transaction')
       .map((data) => data.transactions);
   }
+
+  create(receiverNumber: string, amount: string, reference: string): Observable<Transaction> {
+    return this.apiService.postFormData('/transaction', { senderNumber: "0000", receiverNumber: receiverNumber, amount: amount, reference: reference});
+  }
 }

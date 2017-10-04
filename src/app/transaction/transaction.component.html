@@ -16,4 +16,21 @@
       <td>{{ transaction.transactionDate | date:'dd.MM.y HH:mm:ss' }}</td>
     </tr>
   </table>
+
+  <div class="errors">
+      <div *ngFor="let error of errors" class="alert alert-danger">
+        {{ error.error }}
+      </div>
+  </div>
+
+  <form [formGroup]="createTransactionForm" (ngSubmit)="createTransaction()">
+    <div class="form-group">
+      <label for="receiverNumber">Neue Transaktion</label>
+      <input type="text" class="form-control" placeholder="ReceiverNumber" formControlName="receiverNumber">
+      <input type="text" class="form-control" placeholder="Amount" formControlName="amount">
+      <input type="text" class="form-control" placeholder="Reference" formControlName="reference">
+    </div>
+    <input type="submit" class="btn btn-success" value="Überweisen">
+  </form>
+
 </div>
