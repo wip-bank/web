@@ -13,7 +13,12 @@ export class TransactionService {
       .map((data) => data.transactions);
   }
 
-  create(receiverNumber: string, amount: string, reference: string): Observable<Transaction> {
-    return this.apiService.postFormData('/transaction', { senderNumber: "0000", receiverNumber: receiverNumber, amount: amount, reference: reference});
+  create(receiverNumber: string, amount: string, reference: string): Observable<string> {
+    return this.apiService.postFormData('/transaction', {
+      senderNumber: '0000',
+      receiverNumber,
+      amount,
+      reference
+    });
   }
 }

@@ -27,21 +27,26 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit() {
     this.errors = [];
+    this.getAllTransactions();
+  }
+
+  getAllTransactions() {
     this.transactionService.getAll().subscribe((transactions: Transaction[]) => {
       this.transactions = transactions;
     });
   }
 
-  createTransaction(){
+  createTransaction() {
     const receiverNumber = this.createTransactionForm.value.receiverNumber;
     const amount = this.createTransactionForm.value.amount;
     const reference = this.createTransactionForm.value.reference;
-    this.createTransactionForm.reset();
-    this.transactionService.create(receiverNumber, amount, reference).subscribe((transaction: Transaction) => {
-    this.ngOnInit();
-  }, (error: any) => {
-    this.pushError(error);
-  });
+    this.transactionService.create(receiverNumber, amount, reference)
+      .subscribe(() => {
+        this.createTransactionForm.reset();
+        this.getAllTransactions();
+      }, (error: any) => {
+        this.pushError(error);
+      });
   }
 
   pushError(error) {

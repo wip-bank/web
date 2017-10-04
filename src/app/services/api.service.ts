@@ -61,6 +61,10 @@ export class ApiService {
   }
 
   private mapResponse(res: Response): Object {
-    return res.json();
+    try {
+      return res.json();
+    } catch (error) {
+      return res;
+    }
   }
 }
