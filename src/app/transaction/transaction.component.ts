@@ -13,7 +13,7 @@ import { TransactionService, ApiService } from '../services';
 export class TransactionComponent implements OnInit {
 
   transactions: Transaction[];
-  errors: any[];
+  messages: any[];
   createTransactionForm = this.formBuilder.group({
     receiverNumber: ['', Validators.required],
     amount: ['', Validators.required],
@@ -26,7 +26,7 @@ export class TransactionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.errors = [];
+    this.messages = [];
     this.getAllTransactions();
   }
 
@@ -44,15 +44,22 @@ export class TransactionComponent implements OnInit {
       .subscribe(() => {
         this.createTransactionForm.reset();
         this.getAllTransactions();
+        this.flash({
+          type: 'success',
+          message: 'Transaction executed successfully'
+        });
       }, (error: any) => {
-        this.pushError(error);
+        this.flash({
+          type: 'error',
+          message: error.error
+        });
       });
   }
 
-  pushError(error) {
-    this.errors.push(error);
+  flash(message) {
+    this.messages.push(message);
     setTimeout(() => {
-      this.errors.shift();
+      this.messages.shift();
     }, 5000);
   }
 }

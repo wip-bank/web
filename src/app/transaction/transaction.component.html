@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Neue Transaktion als Bank</h1>
   <div class="errors">
-      <div *ngFor="let error of errors" class="alert alert-danger">
-        {{ error.error }}
+      <div *ngFor="let flash of messages" class="alert" [class.alert-danger]="flash.type == 'error'" [class.alert-success]="flash.type == 'success'">
+        {{ flash.message }}
       </div>
   </div>
 

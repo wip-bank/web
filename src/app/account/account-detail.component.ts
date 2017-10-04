@@ -11,7 +11,7 @@ import { AccountService, ApiService } from '../services';
 })
 export class AccountDetailComponent {
   @Input('account') account: Account;
-  @Output() error: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<any> = new EventEmitter();
   showDetail: boolean;
   updateAccountForm = this.formBuilder.group({
     owner: ['', Validators.required]
@@ -30,8 +30,15 @@ export class AccountDetailComponent {
     this.accountService.update(this.account.number, owner).subscribe((account: Account) => {
       this.account = account;
       this.showDetail = false;
+      this.error.emit({
+        type: 'success',
+        message: `Name changed to '${account.owner}'`
+      });
     }, (error: any) => {
-      this.error.emit(error);
+      this.error.emit({
+        type: 'error',
+        message: error.error
+      });
     });
   }
 }

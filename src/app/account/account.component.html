@@ -7,18 +7,12 @@
       <th>Name</th>
       <th>Aktion</th>
     </thead>
-
-    <!-- <tr *ngFor="let account of accounts">
-      <th scope="row">{{ account.number }}</th>
-      <td>{{ account.owner }}</td>
-      <td><a href="">mehr...</a></td>
-    </tr> -->
-    <tr app-account-detail *ngFor="let account of accounts" [account]="account" (error)="pushError($event)"></tr>
+    <tr app-account-detail *ngFor="let account of accounts" [account]="account" (error)="flash($event)"></tr>
   </table>
 
   <div class="errors">
-    <div *ngFor="let error of errors" class="alert alert-danger">
-      {{ error.error }}
+    <div *ngFor="let flash of messages" class="alert" [class.alert-danger]="flash.type == 'error'" [class.alert-success]="flash.type == 'success'">
+      {{ flash.message }}
     </div>
   </div>
 

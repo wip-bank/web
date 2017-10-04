@@ -11,7 +11,7 @@ import { AccountService, ApiService } from '../services';
 })
 export class AccountComponent implements OnInit {
   accounts: Account[];
-  errors: any[];
+  messages: any[];
   createAccountForm = this.formBuilder.group({
     owner: ['', Validators.required]
   });
@@ -22,7 +22,7 @@ export class AccountComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.errors = [];
+    this.messages = [];
     this.loadData();
   }
 
@@ -37,15 +37,22 @@ export class AccountComponent implements OnInit {
     this.createAccountForm.reset();
     this.accountService.create(owner).subscribe((account: Account) => {
       this.loadData();
+      this.flash({
+        type: 'success',
+        message: `Account '${account.number}' created successfully`
+      });
     }, (error: any) => {
-      this.pushError(error);
+      this.flash({
+        type: 'error',
+        message: error.error
+      });
     });
   }
 
-  pushError(error) {
-    this.errors.push(error);
+  flash(message) {
+    this.messages.push(message);
     setTimeout(() => {
-      this.errors.shift();
+      this.messages.shift();
     }, 5000);
   }
 }
