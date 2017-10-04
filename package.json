@@ -8,7 +8,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "clean": "rm -rf ../server/de.fhdw.wipbank.client.angular",
+    "deploy": "npm run clean && npm run build && mv dist ../server/de.fhdw.wipbank.client.angular"
   },
   "private": true,
   "dependencies": {
