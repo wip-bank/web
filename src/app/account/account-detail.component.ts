@@ -74,7 +74,11 @@ export class AccountDetailComponent {
     this.balance = 0;
     if (this.account.transactions != null) {
       this.account.transactions .forEach(transaction => {
-        this.balance += transaction.amount;
+        if (transaction.receiver.number === this.account.number) {
+          this.balance += transaction.amount;
+        } else {
+          this.balance -= transaction.amount;
+        }
       });
     }
   }
