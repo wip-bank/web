@@ -48,13 +48,16 @@ export class AccountDetailComponent {
 
   /**
     Ermittelt die Transaktionen eines Accounts und öffnet die Detailansicht.
+    Ausnahme: Konto der Bank
     @author: Daniel Sawenko
   */
   showDetailView() {
-    this.accountService.get(this.account.number).subscribe((account: Account) =>{
-      this.account = account;
-      this.transactions = this.account.transactions;
-    });
+    if(this.account.number != '0000'){
+      this.accountService.get(this.account.number).subscribe((account: Account) =>{
+        this.account = account;
+        this.transactions = this.account.transactions;
+      });
+    }
     this.showDetail = !this.showDetail;
     if (this.showDetail)
       this.detailansicht_btn_name = 'Detailansicht schließen';
