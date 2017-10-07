@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { Account } from '../models';
-import { AccountService, ApiService } from '../services';
+import { Account, Transaction } from '../models';
+import { AccountService, ApiService, TransactionService } from '../services';
 
 @Component({
   selector: '[app-account-detail]',
@@ -16,6 +16,8 @@ export class AccountDetailComponent {
   updateAccountForm = this.formBuilder.group({
     owner: ['', Validators.required]
   });
+  transactions: Transaction[];
+  detailansicht_btn_name: String = 'Detailansicht öffnen';
 
   constructor(
     private accountService: AccountService,
@@ -29,7 +31,9 @@ export class AccountDetailComponent {
     this.updateAccountForm.reset();
     this.accountService.update(this.account.number, owner).subscribe((account: Account) => {
       this.account = account;
+      this.transactions = this.account.transactions;
       this.showDetail = false;
+      this.detailansicht_btn_name = 'Detailansicht öffnen';
       this.error.emit({
         type: 'success',
         message: `Name changed to '${account.owner}'`
@@ -41,4 +45,21 @@ export class AccountDetailComponent {
       });
     });
   }
+
+  /**
+    Ermittelt die Transaktionen eines Accounts und öffnet die Detailansicht.
+    @author: Daniel Sawenko
+  */
+  showDetailView() {
+    this.accountService.get(this.account.number).subscribe((account: Account) =>{
+      this.account = account;
+      this.transactions = this.account.transactions;
+    });
+    this.showDetail = !this.showDetail;
+    if (this.showDetail)
+      this.detailansicht_btn_name = 'Detailansicht schließen';
+    else
+      this.detailansicht_btn_name = 'Detailansicht öffnen';
+  }
+
 }

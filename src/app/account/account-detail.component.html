@@ -1,6 +1,6 @@
 <th scope="row">{{ account.number }}</th>
 <td>{{ account.owner }}</td>
-<td><a (click)="showDetail = !showDetail">mehr...</a></td>
+<td><a (click)="showDetailView()">{{detailansicht_btn_name}}</a></td>
 <div *ngIf="showDetail">
   <form [formGroup]="updateAccountForm" (ngSubmit)="updateAccount()">
     <div class="form-group">
@@ -9,4 +9,21 @@
     </div>
     <input type="submit" class="btn btn-success" value="Ändern">
   </form>
+  <h1 *ngIf="account.number != '0000'">Transaktionen</h1>
+  <table class="table table-striped" *ngIf="account.number != '0000'">
+    <thead>
+      <th>Sender</th>
+      <th>Empfänger</th>
+      <th>Betrag</th>
+      <th>Betreff</th>
+      <th>Datum</th>
+    </thead>
+    <tr  *ngFor="let transaction of account.transactions">
+      <td>{{ transaction.sender.owner }}</td>
+      <td>{{ transaction.receiver.owner }}</td>
+      <td>{{ transaction.amount | currency:'EUR':true }}</td>
+      <td>{{ transaction.reference }}</td>
+      <td>{{ transaction.transactionDate | date:'dd.MM.y HH:mm:ss' }}</td>
+    </tr>
+  </table>
 </div>
