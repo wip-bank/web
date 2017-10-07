@@ -16,8 +16,8 @@ export class AccountDetailComponent {
   updateAccountForm = this.formBuilder.group({
     owner: ['', Validators.required]
   });
-  transactions: Transaction[];
   detailansicht_btn_name: String = 'Detailansicht öffnen';
+  balance: number;
 
   constructor(
     private accountService: AccountService,
@@ -31,7 +31,7 @@ export class AccountDetailComponent {
     this.updateAccountForm.reset();
     this.accountService.update(this.account.number, owner).subscribe((account: Account) => {
       this.account = account;
-      this.transactions = this.account.transactions;
+      this.updateBalance();
       this.showDetail = false;
       this.detailansicht_btn_name = 'Detailansicht öffnen';
       this.error.emit({
@@ -47,22 +47,36 @@ export class AccountDetailComponent {
   }
 
   /**
-    Ermittelt die Transaktionen eines Accounts und öffnet die Detailansicht.
-    Ausnahme: Konto der Bank
-    @author: Daniel Sawenko
-  */
+   * Ermittelt die Transaktionen des ausgewählten Accounts und öffnet die Detailansicht.
+   * Ausnahme: Konto der Bank
+   * @author Daniel Sawenko
+   */
   showDetailView() {
-    if(this.account.number != '0000'){
-      this.accountService.get(this.account.number).subscribe((account: Account) =>{
+    if (this.account.number !== '0000') {
+      this.accountService.get(this.account.number).subscribe((account: Account) => {
         this.account = account;
-        this.transactions = this.account.transactions;
+        this.updateBalance();
       });
     }
     this.showDetail = !this.showDetail;
-    if (this.showDetail)
+    if (this.showDetail) {
       this.detailansicht_btn_name = 'Detailansicht schließen';
-    else
+    } else {
       this.detailansicht_btn_name = 'Detailansicht öffnen';
+    }
+
+  }
+
+  /** Ermittelt den Kontostand des ausgewählten Accounts
+   * @author Daniel Sawenko
+   */
+  updateBalance() {
+    this.balance = 0;
+    if (this.account.transactions != null) {
+      this.account.transactions .forEach(transaction => {
+        this.balance += transaction.amount;
+      });
+    }
   }
 
 }

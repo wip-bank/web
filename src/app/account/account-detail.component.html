@@ -9,7 +9,9 @@
     </div>
     <input type="submit" class="btn btn-success" value="Ändern">
   </form>
-  <h1 *ngIf="account.number != '0000'">Transaktionen</h1>
+  <h2 *ngIf="account.number != '0000'">Kontostand</h2>
+  <div>{{ balance | currency:'EUR':true }}</div>
+  <h2 *ngIf="account.number != '0000'">Transaktionen</h2>
   <table class="table table-striped" *ngIf="account.number != '0000'">
     <thead>
       <th>Sender</th>
@@ -18,7 +20,7 @@
       <th>Betreff</th>
       <th>Datum</th>
     </thead>
-    <tr  *ngFor="let transaction of account.transactions">
+    <tr *ngFor="let transaction of account.transactions">
       <td>{{ transaction.sender.owner }}</td>
       <td>{{ transaction.receiver.owner }}</td>
       <td>{{ transaction.amount | currency:'EUR':true }}</td>
