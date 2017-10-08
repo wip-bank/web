@@ -4,6 +4,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Account } from '../models';
 import { AccountService, ApiService } from '../services';
 
+/**
+ * Account Komponente
+ * Enthält eine Liste aller Accounts und die Mäglichkeit neue Accounts zu erstellen
+ *
+ * @author Philipp Dyck
+ */
 @Component({
   selector: 'app-account-page',
   templateUrl: './account.component.html',
@@ -21,17 +27,29 @@ export class AccountComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
+  /**
+   * Intialisiert die Komponente
+   * @author Philipp Dyck
+   */
   ngOnInit() {
     this.messages = [];
     this.loadData();
   }
 
+  /**
+   * Holt sich die Liste der aktuellen Accounts
+   * @author Philipp Dyck
+   */
   loadData() {
     this.accountService.getAll().subscribe((accounts: Account[]) => {
       this.accounts = accounts;
     });
   }
 
+  /**
+   * Erstellt einen neuen Account und zeigt eine Nachricht über den Erfolg des Vorgangs an
+   * @author Philipp Dyck
+   */
   createAccount() {
     const owner = this.createAccountForm.value.owner;
     this.createAccountForm.reset();
@@ -49,6 +67,10 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  /**
+   * Erstellt eine Nachricht, die nach 5 Sekunden entfernt wird
+   * @author Philipp Dyck
+   */
   flash(message) {
     this.messages.push(message);
     setTimeout(() => {

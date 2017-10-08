@@ -4,6 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Account, Transaction } from '../models';
 import { AccountService, ApiService, TransactionService } from '../services';
 
+/**
+ * Detailansicht eines Accounts aus der Tabelle
+ * @author Philipp Dyck
+ */
 @Component({
   selector: '[app-account-detail]',
   templateUrl: './account-detail.component.html',
@@ -26,6 +30,10 @@ export class AccountDetailComponent {
     this.showDetail = false;
   }
 
+  /**
+   * Ändert den Namen eines Accounts.
+   * @author Daniel Sawenko
+   */
   updateAccount() {
     const owner = this.updateAccountForm.value.owner;
     this.updateAccountForm.reset();

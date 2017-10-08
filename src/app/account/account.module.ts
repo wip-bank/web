@@ -13,6 +13,10 @@ const accountRouting: ModuleWithProviders = RouterModule.forChild([
   }
 ]);
 
+/**
+ * Angular Modul für die Kontoseite
+ * @author Philipp Dyck
+ */
 @NgModule({
   declarations: [
     AccountComponent,

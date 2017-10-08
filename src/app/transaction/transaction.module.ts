@@ -12,6 +12,10 @@ const transactionRouting: ModuleWithProviders = RouterModule.forChild([
   }
 ]);
 
+/**
+ * Angular Modul für die Transaktionsseite
+ * @author Philipp Dyck
+ */
 @NgModule({
   declarations: [
     TransactionComponent

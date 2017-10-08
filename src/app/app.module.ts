@@ -11,6 +11,11 @@ import { TransactionModule } from './transaction/transaction.module';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true});
 
+/**
+ * Angular Modul für die gesamte App
+ * Enthält unter anderem die Einstellung für den Router
+ * @author Philipp Dyck
+ */
 @NgModule({
   declarations: [
     AppComponent,
